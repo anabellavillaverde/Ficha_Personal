@@ -1,29 +1,19 @@
-import { useState } from "react";
+import { Routes, Route, Link } from "react-router-dom";
 import Home from "./pages/Home";
 import Tarjeta from "./pages/Tarjeta";
-import "./App.css";
 
 function App() {
-  const [mostrarTarjeta, setMostrarTarjeta] = useState(false);
-  const [datosUsuario, setDatosUsuario] = useState(null);
-
-  const manejarEnvioFormulario = (datos) => {
-    setDatosUsuario(datos);
-    setMostrarTarjeta(true);
-  };
-
-  const volverInicio = () => {
-    setMostrarTarjeta(false);
-    setDatosUsuario(null);
-  };
-
   return (
-    <div className="App">
-      {!mostrarTarjeta ? (
-        <Home onSubmit={manejarEnvioFormulario} />
-      ) : (
-        <Tarjeta datos={datosUsuario} onVolver={volverInicio} />
-      )}
+    <div>
+      <nav style={{ marginBottom: "1rem" }}>
+        <Link to="/">Home</Link> |{" "}
+        <Link to="/tarjeta">Formulario</Link>
+      </nav>
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/tarjeta" element={<Tarjeta />} />
+      </Routes>
     </div>
   );
 }
